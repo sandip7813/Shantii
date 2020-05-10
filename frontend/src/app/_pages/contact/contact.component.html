@@ -1,0 +1,100 @@
+<app-header-nav [navData]="pageTitle"></app-header-nav>
+
+<app-breadcrumbs [breadTitle]="pageTitle" [breads]="breadArray"></app-breadcrumbs>
+
+<section class="ds columns_padding_25 section_padding_top_50 section_padding_bottom_50">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 to_animate" data-animation="scaleAppear">
+                
+                <div class="alert alert-success" role="alert" *ngIf="submitSuccess">
+                    Thank you for Contacting Us. <br>
+                    We'll get back to you soon.
+                </div>
+
+                <form class="contact-form columns_padding_5 bottommargin_40" [formGroup]="contactForm" (ngSubmit)="onContactFormSubmit()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group bottommargin_0"> <label for="name">Full Name <span class="required">*</span></label> <i class="fa fa-user highlight" aria-hidden="true"></i> <input type="text" formControlName="full_name" class="form-control" placeholder="Full Name">	
+                            </div>
+
+                            <div class="alert alert-danger" role="alert" *ngIf="(contactFormControl.full_name.touched || submitted) && contactFormControl.full_name.errors?.required">
+                                <strong>Full Name</strong> is required.
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group bottommargin_0"> <label for="phone">Phone Number </label> <i class="fa fa-phone highlight" aria-hidden="true"></i> <input type="text" formControlName="phone_number" class="form-control" placeholder="Phone Number">											
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group bottommargin_0"> <label for="email">Email address<span class="required">*</span></label> <i class="fa fa-envelope highlight" aria-hidden="true"></i> <input type="email" formControlName="email" class="form-control" placeholder="Email Address">
+                            </div>
+
+                            <div class="alert alert-danger" role="alert" *ngIf="(contactFormControl.email.touched || submitted) && contactFormControl.email.errors?.required">
+                                <strong>Email ID</strong> is required.
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="contactFormControl.email.touched && contactFormControl.email.errors?.email">
+                                Invalid <strong>Email address</strong>.
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group bottommargin_0"> <label for="subject">Subject<span class="required">*</span></label> <i class="fa fa-flag highlight" aria-hidden="true"></i> <input type="text" formControlName="subject" class="form-control" placeholder="Subject">
+                            </div>
+
+                            <div class="alert alert-danger" role="alert" *ngIf="(contactFormControl.subject.touched || submitted) && contactFormControl.subject.errors?.required">
+                                <strong>Subject</strong> is required.
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="contact-form-message form-group bottommargin_0"> <label for="message">Message</label> <i class="fa fa-comment highlight" aria-hidden="true"></i> <textarea rows="3" cols="45" formControlName="message" class="form-control" placeholder="Message"></textarea>
+                            </div>
+
+                            <div class="alert alert-danger" role="alert" *ngIf="(contactFormControl.message.touched || submitted) && contactFormControl.message.errors?.required">
+                                <strong>Message</strong> is required.
+                            </div>
+                        </div>
+                        <div class="col-sm-12 bottommargin_0">
+                            <div class="contact-form-submit topmargin_10"> 
+                                <button type="submit" name="contact_submit" class="theme_button color1 wide_button margin_0" *ngIf="!btnLoader">Send message</button>
+
+                                <img src="./assets/images/btn_loader.gif" *ngIf="btnLoader">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4 to_animate" data-animation="scaleAppear">
+                <ul class="list1 no-bullets no-top-border no-bottom-border">
+                    <li>
+                        <div class="media">
+                            <div class="media-left"> <i class="rt-icon2-shop highlight fontsize_18"></i> </div>
+                            <div class="media-body">
+                                <h6 class="media-heading grey">Postal Address:</h6> PO Box 97845 Some str. 567, Los Angeles, California, United States </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="media">
+                            <div class="media-left"> <i class="rt-icon2-phone5 highlight fontsize_18"></i> </div>
+                            <div class="media-body">
+                                <h6 class="media-heading grey">Phone:</h6> 8(800) 123-12345 </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="media">
+                            <div class="media-left"> <i class="rt-icon2-stack4 highlight fontsize_18"></i> </div>
+                            <div class="media-body">
+                                <h6 class="media-heading grey">Fax:</h6> 8(800) 123-12345 </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="media">
+                            <div class="media-left"> <i class="rt-icon2-mail highlight fontsize_18"></i> </div>
+                            <div class="media-body greylinks">
+                                <h6 class="media-heading grey">Email:</h6> <a href="mailto:your@mail.com">rachel_fan@example.com</a> </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

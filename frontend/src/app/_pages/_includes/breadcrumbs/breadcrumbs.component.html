@@ -1,0 +1,16 @@
+<section class="page_breadcrumbs ls section_padding_top_25 section_padding_bottom_25 table_section table_section_md">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 text-center text-md-left">
+                <h2 class="small highlight">{{breadTitle}}</h2>
+            </div>
+            <div class="col-md-4 text-center text-md-right">
+                <ol class="breadcrumb greylinks">
+                    <li *ngFor="let item of breads">
+                        <a href="{{item.href_path}}" class="{{item.bread_class}}">{{item.bread_text}}</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>

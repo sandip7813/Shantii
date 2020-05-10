@@ -1,0 +1,52 @@
+<app-header-nav [navData]="pageTitle"></app-header-nav>
+
+<app-breadcrumbs [breadTitle]="pageTitle" [breads]="breadArray"></app-breadcrumbs>
+
+<section class="ds page_portfolio section_padding_top_50 section_padding_bottom_50">
+    <div class="container">
+        <!--.row-->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#tab1" role="tab" data-toggle="tab"><i class="rt-icon2-heart-outline"></i> Profile Pictures</a></li>
+                    <li><a href="#tab2" role="tab" data-toggle="tab"><i class="rt-icon2-star-outline"></i>Merchandise Pictures</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content top-color-border">
+                    <div class="tab-pane fade in active" id="tab1">
+                        
+                        <div *ngFor="let galProfilePhoto of profilePhotos; let i=index" class="isotope-item col-lg-4 col-md-6 col-sm-12 {{galProfilePhoto.picture_caption}}">
+                            <div class="vertical-item gallery-item content-absolute text-center ds">
+                                <div class="item-media"> 
+                                    <img src="{{thumb_path}}{{galProfilePhoto.picture_title}}" alt="">
+                                    <div class="media-links">
+                                        <div class="links-wrap"> <a class="p-view prettyPhoto" href="{{thumb_path}}{{galProfilePhoto.picture_title}}"></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                    <div class="tab-pane fade" id="tab2">
+                    
+                        <div *ngFor="let galMerchandisePhoto of merchandisePhotos; let i=index" class="isotope-item col-lg-4 col-md-6 col-sm-12 {{galMerchandisePhoto.picture_caption}}">
+                            <div class="vertical-item gallery-item content-absolute text-center ds">
+                                <div class="item-media"> 
+                                    <img src="{{thumb_path}}{{galMerchandisePhoto.picture_title}}" alt="">
+                                    <div class="media-links">
+                                        <div class="links-wrap"> <a class="p-view prettyPhoto" href="{{thumb_path}}{{galMerchandisePhoto.picture_title}}"></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
