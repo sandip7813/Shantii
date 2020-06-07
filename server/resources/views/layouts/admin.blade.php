@@ -12,6 +12,8 @@
 	<link type="text/css" href="/admin/css/theme.css" rel="stylesheet">
 	<link type="text/css" href="/admin/images/icons/css/font-awesome.css" rel="stylesheet">
 	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
+
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css" />
 </head>
 <body>
 
@@ -79,12 +81,12 @@
 							</li>
 							
 							<li>
-								<a class="collapsed" data-toggle="collapse" href="#toggleCategories">
-									<i class="menu-icon icon-tasks"></i>
+								<a class="collapsed" data-toggle="collapse" href="#togglePictures">
+									<i class="menu-icon icon-picture"></i>
 									<i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right"></i>
 									Pictures
 								</a>
-								<ul id="toggleCategories" class="collapse unstyled">
+								<ul id="togglePictures" class="collapse unstyled">
 									<li>
 										<a href="{{ route('admin.pictures.index') }}">
 											<i class="icon-eye-open"></i>
@@ -100,9 +102,66 @@
 								</ul>
 							</li>
 
+							<li>
+								<a class="collapsed" data-toggle="collapse" href="#toggleVideos">
+									<i class="menu-icon icon-play-circle"></i>
+									<i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right"></i>
+									Videos
+								</a>
+								<ul id="toggleVideos" class="collapse unstyled">
+									<li>
+										<a href="{{ route('admin.videos.index') }}">
+											<i class="icon-eye-open"></i>
+											View Videos
+										</a>
+									</li>
+									<li>
+										<a href="{{ route('admin.videos.create') }}">
+											<i class="icon-plus"></i>
+											Add New Video
+										</a>
+									</li>
+								</ul>
+							</li>
+
+							<li>
+								<a class="collapsed" data-toggle="collapse" href="#toggleProducts">
+									<i class="menu-icon icon-tasks"></i>
+									<i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right"></i>
+									Products
+								</a>
+								<ul id="toggleProducts" class="collapse unstyled">
+									<li>
+										<a href="{{ route('admin.pictures.index') }}">
+											<i class="icon-eye-open"></i>
+											View Products
+										</a>
+									</li>
+									<li>
+										<a href="{{ route('admin.products.create') }}">
+											<i class="icon-plus"></i>
+											Add New Products
+										</a>
+									</li>
+
+									<li>
+										<a href="{{ route('admin.product-categories.index') }}">
+											<i class="icon-eye-open"></i>
+											View Categories
+										</a>
+									</li>
+									<li>
+										<a href="{{ route('admin.product-categories.create') }}">
+											<i class="icon-plus"></i>
+											Add New Category
+										</a>
+									</li>
+								</ul>
+							</li>
+
 							<li class="active">
 								<a href="{{ route('admin.general.contactslist') }}">
-									<i class="menu-icon icon-dashboard"></i>
+									<i class="menu-icon icon-user"></i>
 									Contacts
 								</a>
 							</li>
@@ -148,6 +207,8 @@
 	<script src="/admin/scripts/jquery-ui-1.10.1.custom.min.js"></script>
 	<script src="/admin/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/admin/scripts/datatables/jquery.dataTables.js"></script>
+
+	
 	<script>
 		$(document).ready(function() {
 			$('.datatable-1').dataTable();
@@ -156,7 +217,11 @@
 			$('.dataTables_paginate > a:first-child').append('<i class="icon-chevron-left shaded"></i>');
 			$('.dataTables_paginate > a:last-child').append('<i class="icon-chevron-right shaded"></i>');
 
-			$('[data-toggle="tooltip"]').tooltip()
+			$('[data-toggle="tooltip"]').tooltip();
+
+			
 		});
 	</script>
+
+	@stack('scripts')
 </body>

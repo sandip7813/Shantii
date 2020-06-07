@@ -31,8 +31,8 @@ export class GalleryComponent implements OnInit {
     
     //++++++++++++++++++++++++ GENERATE BREADCRUMB :: Start ++++++++++++++++++++++++//
     this.breadArray.push(
-      {href_path: '/', bread_text: 'Home', bread_class: ''},
-      {href_path: '/gallery', bread_text:this.pageTitle, bread_class: 'active'},
+      {href_path: './', bread_text: 'Home', bread_class: ''},
+      {href_path: './gallery', bread_text:this.pageTitle, bread_class: 'active'},
       );
     //++++++++++++++++++++++++ GENERATE BREADCRUMB :: End ++++++++++++++++++++++++//
 

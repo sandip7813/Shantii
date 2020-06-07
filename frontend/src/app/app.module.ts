@@ -24,6 +24,10 @@ import { HomeGalleryMerchandiseComponent } from './_pages/_includes/home-gallery
 import { HttpClientModule } from '@angular/common/http';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductdetailsComponent } from './_pages/productdetails/productdetails.component';
+import { PagenotfoundComponent } from './_pages/pagenotfound/pagenotfound.component';
+import { VideosComponent } from './_pages/videos/videos.component';
+import { VideodetailsComponent } from './_pages/videodetails/videodetails.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     GalleryComponent,
     ContactComponent,
     BreadcrumbsComponent,
-    HomeGalleryMerchandiseComponent
+    HomeGalleryMerchandiseComponent,
+    ProductdetailsComponent,
+    PagenotfoundComponent,
+    VideosComponent,
+    VideodetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -149,6 +149,7 @@
   </div>
 </div>
 
+@push('scripts')
 <script>
 function open_image_modal(img_name){
     $('#imagepreview').attr('src', '/uploaded_images/'+img_name);
@@ -169,10 +170,10 @@ function change_picture_status(picture_id, picture_sts){
                 url:'/change_picture_status',
                 data:{picture_id: picture_id, picture_sts:picture_sts},
                 success:function(data) {
-                    console.log(data);
+                    //console.log(data);
 
                     if(data.status == 'success'){
-                        alert('Picture has been changed to '+picture_sts);
+                        alert('Picture status has been changed to '+picture_sts);
                         
                         bg_color    = (picture_sts == 'Inactive') ? '#fabebe' : 'none';
                         $('#picture_'+picture_id).css({'background': bg_color});
@@ -207,3 +208,4 @@ function delete_picture(picture_id, picture_title){
     }
 }
 </script>
+@endpush

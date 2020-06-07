@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Contact_me;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -16,9 +17,12 @@ class adminContactMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+    protected $contacts;
+    
+    public function __construct(Contact_me $Contact_me)
     {
-        //
+        $this->contacts = $Contact_me;
     }
 
     /**
@@ -28,7 +32,9 @@ class adminContactMail extends Mailable
      */
     public function build()
     {
-        return $this->from('sandeepnandi4@gmail.com')
-                    ->view('view.name');
+        return $this->from('sandip_nandy2005@yahoo.com')
+                    ->subject('Shantii:: New Contact Message')
+                    ->view('emails.admincontact')
+                    ->with([$this->contacts]);
     }
 }

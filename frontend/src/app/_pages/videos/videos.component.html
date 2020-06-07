@@ -1,0 +1,27 @@
+<app-header-nav [navData]="pageTitle"></app-header-nav>
+
+<app-breadcrumbs [breadTitle]="pageTitle" [breads]="breadArray"></app-breadcrumbs>
+
+<section class="ds page_portfolio section_padding_top_150 section_padding_bottom_100 columns_margin_bottom_40">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-md-4 col-sm-6" *ngFor="let vid of videosArray">
+                <div class="vertical-item slide-media text-center loop-color">
+                    <div class="item-media-wrap"> <img src="./assets/images/albums/cd.png" alt="">
+                        <div class="item-media back-media"> <img src="./assets/images/albums/cd.png" alt=""> </div>
+                        <div class="item-media"> <img src="http://img.youtube.com/vi/{{vid.youtube_id}}/mqdefault.jpg" alt="" style="width: 250px; height:250px;">
+                            <div class="media-links no-overlay">
+                                <div class="links-wrap"> <a href="./video/{{vid.video_slug}}" class="p-link"></a> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item-content topmargin_25">
+                        <h4 class="entry-title topmargin_5"> <a href="./video/{{vid.video_slug}}">{{vid.short_title}}</a> </h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

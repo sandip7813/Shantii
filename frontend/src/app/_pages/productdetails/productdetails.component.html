@@ -1,0 +1,76 @@
+<app-header-nav [navData]="pageTitle"></app-header-nav>
+
+<app-breadcrumbs [breadTitle]="pageTitle" [breads]="breadArray"></app-breadcrumbs>
+
+<section class="ds section_padding_top_50 section_padding_bottom_130 columns_padding_25">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div itemscope="" itemtype="" class="product type-product row columns_padding_25">
+                    <div class="col-sm-6">
+                        
+                        <div class="images text-center">
+                            <img src="{{ large_picture }}" class="attachment-shop_single wp-post-image zoom prettyPhoto" alt="" title="">
+                        </div>
+
+                        <!--eof .images -->
+                        <div class="thumbnails-wrap">
+                            <div id="product-thumbnails" class="owl-carousel thumbnails product-thumbnails" data-margin="10" data-nav="false" data-dots="true" data-items="5" data-responsive-lg="5" data-responsive-md="4" data-responsive-sm="3" data-responsive-xs="2">
+
+                                <div class="owl-item active" *ngFor="let prodImg of picturesArray" style="width: 99px; margin-right: 10px;">
+                                    <img src="{{mid_path}}{{ prodImg.image_title }}" class="attachment-shop_thumbnail" alt="" (click)="getImageSrc(prodImg.image_title)">
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- eof .images -->
+                    </div>
+                    <div class="summary entry-summary col-sm-6">
+                        <h1 itemprop="name" class="product_title">{{ prod_title }}</h1>
+                        
+                        <h4 class="highlight">${{ prod_price | number:'2.2' }}</h4>
+                        
+                        <div><p>{{ prod_desc }}</p></div>
+
+                        <div class="row product_meta small-text greylinks columns_padding_0 divider_30 bottommargin_40">
+                            <div class="col-sm-6"> 
+                                <span class="posted_in">
+                                    <span>Items Left:</span> 
+                                    <span class="highlight"><strong>{{ items_left }}</strong> </span>
+                                </span>
+                            </div>
+
+                            <div class="col-sm-6"> 
+                                <span class="posted_in">
+                                    <span>Category:</span> <span class="categories-links">
+                                        <a rel="category" href="./store/{{ cat_slug }}">{{ cat_title }}</a>
+                                    </span> 
+                                </span>
+                            </div>
+                        </div>
+
+                        
+
+                    <div class="inline-content"> <span class="quantity form-group">
+                        <input type="button" value="+" class="plus">
+                        <i class="fa fa-angle-up" aria-hidden="true"></i>
+                        <input type="number" step="1" min="0" name="product_quantity" value="1" title="Qty" id="product_quantity" class="form-control ">
+                        <input type="button" value="-" class="minus">
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </span> <a href="#" rel="nofollow" class="theme_button color1 min_width_button add_to_cart_button">
+                        Add to cart
+                    </a> </div>
+                        
+                    </div>
+                    <!-- .summary.col- -->
+
+                    
+                </div>
+                <!-- .product.row -->
+
+                
+            </div>
+            <!--eof .col-sm-8 (main content)-->
+        </div>
+    </div>
+</section>

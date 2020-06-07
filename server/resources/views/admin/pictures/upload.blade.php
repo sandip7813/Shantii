@@ -80,7 +80,7 @@
 
 @endsection
 
-
+@push('scripts')
 <script>
 function browse_image(this_obj){
     max_size_mb     = 2;
@@ -112,3 +112,4 @@ function browse_image(this_obj){
     }
 }
 </script>
+@endpush

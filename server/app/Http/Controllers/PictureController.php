@@ -9,24 +9,22 @@ use App\Pictures;
 class PictureController extends Controller
 {
     public function homeGalleryPhotos($photo_type){
-       
-        if($photo_type == 'all'){
-            $profilePhoto = DB::table('pictures')
-                            ->select('*')
-                            ->where([
-                                ['status', '=', '1']
-                            ])
-                            ->get();
+        //++++++++++++++++++++++ PREPARING CONDITIONAL WHERE CLAUSE :: Start ++++++++++++++++++++++//
+        $where_array    = array();
+        
+        $where_array[]  = ['status', '=', 1];
+        
+        if( isset($photo_type) && ($photo_type != '') && ($photo_type != 'all') ){
+            $where_array[]  = ['picture_catagory', '=', $photo_type];
         }
-        else{
-            $profilePhoto = DB::table('pictures')
+        //++++++++++++++++++++++ PREPARING CONDITIONAL WHERE CLAUSE :: End ++++++++++++++++++++++//
+
+         //++++++++++++++++++++++ GENERATING QUERY :: Start ++++++++++++++++++++++//
+        $profilePhoto = DB::table('pictures')
                             ->select('*')
-                            ->where([
-                                ['picture_catagory', '=', $photo_type], 
-                                ['status', '=', '1']
-                            ])
+                            ->where($where_array)
                             ->get();
-        }
+        //++++++++++++++++++++++ GENERATING QUERY :: End ++++++++++++++++++++++//
 
         return $profilePhoto;
     }

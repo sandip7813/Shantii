@@ -1,0 +1,20 @@
+Pending Tasks:
+-------------------
+
+Admin Panel:
+--------------
+1. Product Category - Edit		[Done]
+2. Product Category - Change Status	[Done]
+3. Products - Listing
+4. Product - Delete
+5. Product - Active / Inactive
+6. Product - Edit
+7. Videos - Listing			[Done]
+8. Video - Delete			[Done]
+9. Video Active / Inactive		[Done]
+10. Video - Edit			[Done]
+-------------------------------------------------------
+11. Contact form - email sending
+12. Dashboard - implementation
+13. Profile - Edit
+14. Password - Change

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Contact_me;
 use Illuminate\Support\Facades\DB;
+use App\Mail\adminContactMail;
+use Illuminate\Support\Facades\Mail;
 
 class ContactsController extends Controller
 {
@@ -26,6 +28,19 @@ class ContactsController extends Controller
 
         $insertContact  = $Contact_me->save();
         //+++++++++++++++++++++ INSERT INTO DB :: End +++++++++++++++++++++//
+
+        //+++++++++++++++++++++ SENDING NOTIFICATION EMAIL TO ADMIN :: Start +++++++++++++++++++++//
+        $contactArr = array();
+
+        $contactArr['f_name']   = $f_name;
+        $contactArr['ph_num']   = $ph_num;
+        $contactArr['email_id'] = $email_id;
+        $contactArr['subject']  = $subject;
+        $contactArr['message']  = $message;
+
+        Mail::to('sandeepnandi4@gmail.com')
+            ->send(new adminContactMail($contactArr));
+        //+++++++++++++++++++++ SENDING NOTIFICATION EMAIL TO ADMIN :: End +++++++++++++++++++++//
         
         return array('insertStatus'=>$insertContact);
     }

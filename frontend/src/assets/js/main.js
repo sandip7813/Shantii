@@ -1031,7 +1031,7 @@ function windowLoadInit() {
 			if ($thisLink.attr('href') === '' || $thisLink.attr('href') === '#') {
 				$thisLink.replaceWith($thisLink.data('iframe').replace(/&amp/g, '&').replace(/$lt;/g, '<').replace(/&gt;/g, '>').replace(/$quot;/g, '"')).trigger('click');
 			} else {
-				$thisLink.replaceWith('<iframe class="embed-responsive-item" src="'+ $thisLink.attr('href') + '?rel=0&autoplay=1'+ '"></iframe>');
+				$thisLink.replaceWith('<iframe class="embed-responsive-item" src="'+ $thisLink.attr('href') + '?rel=0&autoplay=1" allow="autoplay"></iframe>');
 			}
 		});
 	});

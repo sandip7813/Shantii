@@ -6,8 +6,9 @@
             </div>
             <div class="col-md-4 text-center text-md-right">
                 <ol class="breadcrumb greylinks">
-                    <li *ngFor="let item of breads">
-                        <a href="{{item.href_path}}" class="{{item.bread_class}}">{{item.bread_text}}</a>
+                    <li *ngFor="let item of breads" class="{{item.bread_class}}">
+                        <a *ngIf="item.bread_class != 'active'" href="{{item.href_path}}">{{item.bread_text}}</a>
+                        <span *ngIf="item.bread_class == 'active'">{{item.bread_text}}</span>
                     </li>
                 </ol>
             </div>

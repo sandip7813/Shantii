@@ -1,0 +1,38 @@
+<app-header-nav [navData]="pageTitle"></app-header-nav>
+
+<app-breadcrumbs [breadTitle]="pageTitle" [breads]="breadArray"></app-breadcrumbs>
+
+<section class="ds section_padding_top_50 columns_margin_bottom_0">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-sm-push-1">
+                <div class="embed-responsive embed-responsive-3by2"> 
+                    <a href="https://www.youtube.com/embed/{{youTube_ID}}" class="embed-placeholder">
+                        <img src="{{youTube_img}}" alt="" style="width: 100%;">
+                    </a> 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ds ms section_padding_top_50 section_padding_bottom_50 columns_padding_25">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10 col-sm-push-1">
+                <article class="single-post vertical-item content-padding big-padding with_background post rounded overflow_hidden">
+                    <div class="item-content">
+                        
+                        <div class="entry-content">
+                            <blockquote>{{ video_details }}</blockquote>
+                        </div>
+                        <!-- .entry-content -->
+                    </div>
+                    <!-- .item-content -->
+                </article>
+                
+            </div>
+            <!--eof .col-sm-8 (main content)-->
+        </div>
+    </div>
+</section>

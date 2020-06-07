@@ -62,15 +62,17 @@ class PicturesController extends Controller
             'picture_catagory'  => 'required',
         ]);
 
+        $img_dir    = 'uploaded_images';
+
         $image = $request->file('picture_title');
 
         $imageName = time().'.'.$image->getClientOriginalExtension();
 
-        $image->move(public_path('uploaded_images'), $imageName);
+        $image->move(public_path($img_dir), $imageName);
         
         //+++++++++++++++++++++ CREATE THUMBNAIL :: Start +++++++++++++++++++++//
         // open an image file
-        $imgThumb = Image::make('uploaded_images/'.$imageName);
+        $imgThumb = Image::make($img_dir . '/'.$imageName);
 
         // resize image instance
         $imgThumb->resize(200, 200);
@@ -79,12 +81,12 @@ class PicturesController extends Controller
         //$imgThumb->insert('public/watermark.png');
 
         // save image in desired format
-        $imgThumb->save('uploaded_images/thumbnail/'.$imageName);
+        $imgThumb->save($img_dir . '/thumbnail/'.$imageName);
         //+++++++++++++++++++++ CREATE THUMBNAIL :: End +++++++++++++++++++++//
 
         //+++++++++++++++++++++ CREATE 780 :: Start +++++++++++++++++++++//
         // open an image file
-        $img780 = Image::make('uploaded_images/'.$imageName);
+        $img780 = Image::make($img_dir . '/'.$imageName);
 
         // resize image instance
         $img780->resize(780, 780);
@@ -93,7 +95,7 @@ class PicturesController extends Controller
         //$imgThumb->insert('public/watermark.png');
 
         // save image in desired format
-        $img780->save('uploaded_images/thumb_780/'.$imageName);
+        $img780->save($img_dir . '/thumb_780/'.$imageName);
         //+++++++++++++++++++++ CREATE THUMBNAIL :: End +++++++++++++++++++++//
 
         //+++++++++++++++++++++ INSERT INTO DB :: Start +++++++++++++++++++++//
