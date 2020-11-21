@@ -49,10 +49,11 @@ Route::post('/change-video-status', 'admin\VideosController@changeStatus');
 
 //++++++++++++++++++++++++++ FRONT-END API SERVICES :: Start ++++++++++++++++++++++++++//
 Route::get('/api/home-photos/{photo_type}', 'PictureController@homeGalleryPhotos');
-Route::post('/api/user_contact', 'ContactsController@submitContactForm');
+Route::post('/api/user-contact', 'ContactsController@submitContactForm');
 Route::get('/api/active-categories', 'StoreController@allActiveCategories');
 Route::get('/api/store-products/{cat_slug}', 'StoreController@allActiveProducts');
 Route::get('/api/products-details/{prod_slug}', 'StoreController@activeProductDetails');
 Route::get('/api/active-videos', 'VideosController@allActiveVideos');
 Route::get('/api/video-details/{vid_slug}', 'VideosController@activeVideoDetails');
+Route::post('/api/generate-cart-products', 'StoreController@totalCartPrice');
 //++++++++++++++++++++++++++ FRONT-END API SERVICES :: End ++++++++++++++++++++++++++//

@@ -25,4 +25,8 @@ export class StoreService {
     return this.http.get( product_dtls_url );
   }
   
+  generate_cart_products( Cart_Storage_Json ){
+    const cart_storage_url = this.server_url + 'generate-cart-products';
+    return this.http.post(cart_storage_url, Cart_Storage_Json);
+  }
 }

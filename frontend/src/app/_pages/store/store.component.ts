@@ -1,9 +1,9 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { StoreService } from 'src/app/_services/store.service';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalConstants } from 'src/app/global-constants';
-import { EventEmitter } from 'protractor';
+import { EventEmitterService } from 'src/app/_services/event-emitter.service';
 
 @Component({
   selector: 'app-store',
@@ -12,28 +12,38 @@ import { EventEmitter } from 'protractor';
 export class StoreComponent implements OnInit {
   category_observer: Observable<any>;
   products_observer: Observable<any>;
+  cart_price_observer: Observable<any>;
+  cart_array_observer:Observable<any>;
 
   server_url:string = GlobalConstants.serverUrl;
 
   thumb_path:string = GlobalConstants.Prd_Img_780_Path;
 
-  @Output() cart_price  = new EventEmitter();
+  item_id:number;
+  item_price:number = 0.00;
 
   constructor(
               private storeService: StoreService,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private emitterService: EventEmitterService
               ) { }
 
   breadArray = [];
   pageTitle: string = '';
 
-  categoriesArray = [];
+  //categoriesArray = [];
   productsArray   = [];
 
   category_length:number = 0;
   product_length:number = 0;
 
   cat_title: string = '';
+
+  Cart_Array  = [];
+  Is_Item_Exists: boolean = false;
+  Cart_Storage_Json:string;
+  Final_Cart_Array  = [];
+  total_price:number = 0.00;
 
   ngOnInit(): void {
     this.pageTitle = 'Store';
@@ -45,14 +55,6 @@ export class StoreComponent implements OnInit {
       cat_slug  = 'all';
     }
     //++++++++++++++++++++++++ GET URL PARAM :: End ++++++++++++++++++++++++//
-    
-    //++++++++++++++++++++++++ FETCH ACTIVE CATEGORIES :: Start ++++++++++++++++++++++++//
-    this.category_observer = this.storeService.get_categories();
-
-    this.category_observer.subscribe(cat_res => {
-      this.categoriesArray  = cat_res;
-    });
-    //++++++++++++++++++++++++ FETCH ACTIVE CATEGORIES :: End ++++++++++++++++++++++++//
 
     //++++++++++++++++++++++++ FETCH ACTIVE PRODUCTS :: Start ++++++++++++++++++++++++//
     this.products_observer = this.storeService.get_products(cat_slug);
@@ -89,15 +91,71 @@ export class StoreComponent implements OnInit {
           this.productsArray.push(prod_res[c].products[p]);
         }
       }
-
-      //console.log(this.productsArray);
     });
     //++++++++++++++++++++++++ FETCH ACTIVE PRODUCTS :: End ++++++++++++++++++++++++//
 
+    this.Cart_Storage_Json = localStorage.getItem('Storage_Cart_Array');
+    this.Cart_Array = JSON.parse( this.Cart_Storage_Json );
+
+    //++++++++++++++++++++++++ GET TOTAL CART PRICE :: Start ++++++++++++++++++++++++//
+    this.cart_price_observer  = this.storeService.generate_cart_products( this.Cart_Array );
+
+    this.cart_price_observer.subscribe(price_res => {
+      this.item_price = (typeof price_res.total_price !== 'undefined') ? price_res.total_price : 0;
+    });
+    //++++++++++++++++++++++++ GET TOTAL CART PRICE :: End ++++++++++++++++++++++++//
+
+    this.regenerate_cart_data();
   }
 
-  add_to_cart(cart_id){
-    this.cart_price.emit(cart_id);
+  add_to_cart(product_id, product_price){
+    this.Cart_Storage_Json = localStorage.getItem('Storage_Cart_Array');
+    this.Cart_Array = JSON.parse( this.Cart_Storage_Json );
+    
+    var Cart_Obj    = {};
+    
+    this.item_id    = product_id;
+    this.item_price = ( this.item_price + product_price );
+
+    this.emitterService.sendCartData(this.item_price);
+
+    this.Is_Item_Exists = this.Cart_Array.some(function(el){ return el.item_id === product_id});
+
+    if( !this.Is_Item_Exists ){
+      Cart_Obj = { item_id:product_id, total_items: 1 };
+      
+      this.Cart_Array.push( Cart_Obj );
+    }
+    else{
+      this.Cart_Array.forEach(function (e) {
+        if( e.item_id == product_id ){
+          e.total_items++;
+        }
+      });
+    }
+
+    localStorage.setItem( 'Storage_Cart_Array', JSON.stringify( this.Cart_Array ) );
+
+    this.regenerate_cart_data();
+  }
+
+  regenerate_cart_data(){
+    //++++++++++++++++++++++++ GENERATE CART ARRAY :: Start ++++++++++++++++++++++++//
+    this.cart_array_observer  = this.storeService.generate_cart_products( this.Cart_Array );
+
+    this.cart_array_observer.subscribe(cart_res => {
+      if(typeof cart_res.cart_array !== 'undefined'){
+        this.Final_Cart_Array = cart_res.cart_array;
+      }
+      else{
+        this.Final_Cart_Array = [];
+      }
+
+      this.total_price = (typeof cart_res.total_price !== 'undefined') ? cart_res.total_price : 0;
+
+      this.emitterService.sendCartData(this.total_price);
+    });
+    //++++++++++++++++++++++++ GENERATE CART ARRAY :: End ++++++++++++++++++++++++//
   }
 
 }

@@ -28,6 +28,9 @@ import { ProductdetailsComponent } from './_pages/productdetails/productdetails.
 import { PagenotfoundComponent } from './_pages/pagenotfound/pagenotfound.component';
 import { VideosComponent } from './_pages/videos/videos.component';
 import { VideodetailsComponent } from './_pages/videodetails/videodetails.component';
+import { ShopcartComponent } from './_pages/shopcart/shopcart.component';
+import { StoreSidebarComponent } from './_pages/_includes/store-sidebar/store-sidebar.component';
+import { EventEmitterService } from './_services/event-emitter.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,9 @@ import { VideodetailsComponent } from './_pages/videodetails/videodetails.compon
     ProductdetailsComponent,
     PagenotfoundComponent,
     VideosComponent,
-    VideodetailsComponent
+    VideodetailsComponent,
+    ShopcartComponent,
+    StoreSidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,7 @@ import { VideodetailsComponent } from './_pages/videodetails/videodetails.compon
     NgImageSliderModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [EventEmitterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

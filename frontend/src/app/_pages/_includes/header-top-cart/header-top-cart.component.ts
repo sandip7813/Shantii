@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header-top-cart',
@@ -6,9 +6,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderTopCartComponent implements OnInit {
 
+  @Input() TotalCartPrice:number;
+
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

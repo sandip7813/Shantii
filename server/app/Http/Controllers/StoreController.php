@@ -66,4 +66,44 @@ class StoreController extends Controller
         return $product_dtls;
     }
     
-}
+    public function totalCartPrice(Request $request){
+        $total_price    = 0;
+
+        $fin_array  = array();
+        
+        if( !empty($request->input()) ){
+            foreach($request->input() as $rkey => $rval){
+                $item_id        = intval($rval['item_id']);
+                $total_items    = intval($rval['total_items']);
+
+                $product_arr    = Products::select('*')
+                                ->with(
+                                    [
+                                        'pictures' => function($pic_qry) {
+                                            $pic_qry
+                                            ->where('image_status', '=', 1)
+                                            ->orderBy('updated_at','DESC')
+                                            ->take(1);
+                                        }
+                                    ]
+                                )
+                                ->where('id', $item_id)
+                                ->where('product_status', 1)
+                                ->first();
+                
+                $product_price  = floatval($product_arr['product_price']);
+                $subtotal       = $product_price * $total_items;
+
+                $product_arr['subtotal']    = $subtotal;
+                $product_arr['total_items'] = $total_items;
+
+                $fin_array['cart_array'][]   = $product_arr;
+
+                $total_price    += $subtotal;
+            }
+
+            $fin_array['total_price']   = $total_price;
+        }
+        
+        return $fin_array;
+    }}
